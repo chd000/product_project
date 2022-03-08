@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.app</groupId>
 	<artifactId>productDto</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
 	<name>productDto</name>
-	<description>Demo project for Spring Boot</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -18,6 +18,8 @@
 		<spring.boot.starter.data.jpa.version>2.6.4</spring.boot.starter.data.jpa.version>
 		<database.h2.version>1.4.197</database.h2.version>
 		<apache.commons.lang3.version>3.12.0</apache.commons.lang3.version>
+		<maven.test.skip>true</maven.test.skip>
+		<start-class>com.app.productDto.ProductsApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -53,6 +55,34 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 			<version>2.6.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.6.5.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.6.5.Final</version>
+		</dependency>
 	</dependencies>
+	<build>
+		<finalName>product_app</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.6.4</version>
+				<executions>
+					<execution>
+						<configuration>
+							<mainClass>com.app.products.ProductsApplication</mainClass>
+							<includeSystemScope>true</includeSystemScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
