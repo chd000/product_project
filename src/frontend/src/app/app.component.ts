@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Product } from './product';
 import { ProductService } from './product.service';
 
@@ -20,6 +21,19 @@ export class AppComponent implements OnInit {
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
         this.products = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onCreateProduct(createFrom: NgForm): void {
+    document.getElementById('create-product-form')?.click();
+    this.productService.createProduct(createFrom.value).subscribe(
+      (response: Product) => {
+        console.log(response);
+        this.getProducts();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
