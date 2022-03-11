@@ -26,4 +26,26 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
+  public onOpenModal(product: Product, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+
+    if (mode === 'create') {
+      button.setAttribute('data-target', '#createProductModal');
+    }
+
+    if (mode === 'update') {
+      button.setAttribute('data-target', '#updateProductModal');
+    }
+
+    if (mode === 'delete') {
+      button.setAttribute('data-target', '#deleteProductModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
 }
