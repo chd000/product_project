@@ -17,18 +17,18 @@ export class ProductService {
   }
 
   public getProduct(product: Product): Observable<Product> {
-    return this.http.get<Product>('${apiServerUrl}/api/v1/product/${product.id}');
+    return this.http.get<Product>('http://localhost:8080/api/v1/product/${product.id}');
   }
 
   public createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>('${apiServerUrl}/api/v1/product/create', product);
+    return this.http.post<Product>('http://localhost:8080/api/v1/product/create', product);
   }
 
   public updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>('${apiServerUrl}/api/v1/product/update', product);
+    return this.http.put<Product>('http://localhost:8080/api/v1/product/update', product);
   }
 
   public deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>('${apiServerUrl}/api/v1/product/delete/${productId}');
+    return this.http.delete<void>('http://localhost:8080/api/v1/product/delete/${productId}');
   }
 }
