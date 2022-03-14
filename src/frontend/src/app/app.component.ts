@@ -11,7 +11,7 @@ import { ProductService } from './product.service';
 })
 export class AppComponent implements OnInit {
   public products: Product[] | undefined;
-  public updateProduct: Product | undefined;
+  public updateProduct: any;
   public deleteProduct: any;
   constructor(private productService: ProductService) { }
 
@@ -45,7 +45,8 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onUpdateProduct(product: Product): void {
+  public onUpdateProduct(product: Product, productId: number): void {
+    product.id = productId;
     this.productService.updateProduct(product).subscribe(
       (response: Product) => {
         console.log(response);
@@ -57,10 +58,13 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteProduct(productId: number): void {
+  public onDeleteProduct(productId: number, deleteForm: NgForm): void {
     this.productService.deleteProduct(productId).subscribe(
       (response: void) => {
         this.getProducts();
+        console.log("deleted");
+        deleteForm.resetForm();
+        console.log("passed");
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -81,6 +85,7 @@ export class AppComponent implements OnInit {
 
     if (mode === 'update') {
       this.updateProduct = product;
+      console.log(product);
       button.setAttribute('data-target', '#updateProductModal');
     }
 

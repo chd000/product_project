@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   public getProduct(product: Product): Observable<Product> {
-    return this.http.get<Product>('http://localhost:8080/api/v1/product/${product.id}');
+    return this.http.get<Product>(`http://localhost:8080/api/v1/product/${product.id}`);
   }
 
   public createProduct(product: Product): Observable<Product> {
@@ -29,6 +29,6 @@ export class ProductService {
   }
 
   public deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>('http://localhost:8080/api/v1/product/${productId}');
+    return this.http.delete<void>(`http://localhost:8080/api/v1/product/${productId}`);
   }
 }
