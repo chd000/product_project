@@ -17,11 +17,12 @@
             <input type="number" ngModel name="price" class="form-control" id="price" placeholder="Price" min="1"
               max="5000" required>
           </div>
+          <div class="modal-footer">
+            <button type="button" id="create-product-form" class="button-4" data-dismiss="modal">Close</button>
+            <button [disabled]="createForm.invalid" type="submit " class="button-4">Save
+              changes</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="create-product-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button [disabled]="createForm.invalid" type="submit " class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -36,21 +37,23 @@
         <h5 class="modal-title" id="updateProductModal">Update product</h5>
       </div>
       <div class="modal-body">
-        <form>
+        <form #updateForm="ngForm">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name">
+            <input type="text" ngModel="{{updateProduct?.name}}" name="name" class="form-control" id="name"
+              placeholder="Name">
           </div>
           <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" ngModel name="price" class="form-control" id="price" placeholder="Price" min="1"
-              max="5000" required>
+            <input type="number" ngModel="{{updateProduct?.price}}" name="price" class="form-control" id="price"
+              placeholder="Price" min="1" max="5000" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="create-product-form" class="button-4" data-dismiss="modal">Close</button>
+            <button (click)="onUpdateProduct(updateForm.value)" type="button" class="button-4">Save
+              changes</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -65,10 +68,10 @@
         <h5 class="modal-title" id="deleteProductModal">Delete Product</h5>
       </div>
       <div class="modal-body">
-        <p>Do you want to delete product?</p>
+        <p>Do you want to delete {{deleteProduct?.name}}?</p>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary">Yes</button>
+          <button type="button" class="button-4" data-dismiss="modal">No</button>
+          <button (click)="onDeleteProduct(deleteProduct?.id)" type="button" class="button-4">Yes</button>
         </div>
       </div>
     </div>

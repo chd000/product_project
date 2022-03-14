@@ -21,14 +21,14 @@ export class ProductService {
   }
 
   public createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>('http://localhost:8080/api/v1/product/create', product);
+    return this.http.post<Product>('http://localhost:8080/api/v1/product/', product);
   }
 
   public updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>('http://localhost:8080/api/v1/product/update', product);
+    return this.http.put<Product>('http://localhost:8080/api/v1/product/', product);
   }
 
   public deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>('http://localhost:8080/api/v1/product/delete/${productId}');
+    return this.http.delete<void>('http://localhost:8080/api/v1/product/${productId}');
   }
 }

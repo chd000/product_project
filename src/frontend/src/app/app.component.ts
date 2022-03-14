@@ -11,6 +11,8 @@ import { ProductService } from './product.service';
 })
 export class AppComponent implements OnInit {
   public products: Product[] | undefined;
+  public updateProduct: Product | undefined;
+  public deleteProduct: any;
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
@@ -34,6 +36,31 @@ export class AppComponent implements OnInit {
       (response: Product) => {
         console.log(response);
         this.getProducts();
+        createFrom.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        createFrom.reset();
+      }
+    );
+  }
+
+  public onUpdateProduct(product: Product): void {
+    this.productService.updateProduct(product).subscribe(
+      (response: Product) => {
+        console.log(response);
+        this.getProducts();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onDeleteProduct(productId: number): void {
+    this.productService.deleteProduct(productId).subscribe(
+      (response: void) => {
+        this.getProducts();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -53,10 +80,12 @@ export class AppComponent implements OnInit {
     }
 
     if (mode === 'update') {
+      this.updateProduct = product;
       button.setAttribute('data-target', '#updateProductModal');
     }
 
     if (mode === 'delete') {
+      this.deleteProduct = product;
       button.setAttribute('data-target', '#deleteProductModal');
     }
     container?.appendChild(button);
