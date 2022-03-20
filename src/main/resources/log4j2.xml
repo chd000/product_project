@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-    <Properties>
-        <Property name="socket.host">${bundle:application:logstash.host}</Property>
-        <Property name="socket.port">${bundle:application:logstash.port}</Property>
-        <Property name="console.thresholdFilter">${bundle:application:logger.console.tresholdFilter}</Property>
-        <Property name="socket.thresholdFilter">${bundle:application:logger.socket.tresholdFilter}</Property>
-    </Properties>
     <Appenders>
-        <Console name="CONSOLE" target="SYSTEM_OUT">
-            <ThresholdFilter level="${console.thresholdFilter}"/>
-            <PatternLayout pattern="%d %-5p [%t] %c{10} - %m%n"/>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout patter="%d{yyyy-MMM-dd HH:mm:cc} [%t] %-5level %-50c{1.} - %msg %n" />
         </Console>
-        <Socket name="SOCKET" host="${socket.host}" port="${socket.port}" immediateFlush="true">
-            <ThresholdFilter level="${socket.thresholdFilter}"/>
-            <JSONLayout eventEol="true" compact="true"/>
-        </Socket>
-        <Async name="ASYNC">
-            <AppenderRef ref="CONSOLE"/>
-            <AppenderRef ref="SOCKET"/>
-        </Async>
+        <File name="File" fileName="Products.log">
+            <PatternLayout patter="$d [%t] %-5level% %-50c{1.} - %msg %n" />
+        </File>
     </Appenders>
 
     <Loggers>
-        <Logger name="ru.example" level="debug" additivity="false">
-            <AppenderRef ref="ASYNC"/>
-        </Logger>
-        <Root level="error">
-            <AppenderRef ref="ASYNC"/>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
         </Root>
     </Loggers>
 </Configuration>
