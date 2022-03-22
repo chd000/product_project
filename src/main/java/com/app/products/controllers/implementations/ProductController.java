@@ -21,6 +21,11 @@ public class ProductController implements ICrudController<ProductDto> {
         this.productService = productService;
     }
 
+    @GetMapping(path = "/")
+    public String login(){
+        return "authenticated successfully";
+    }
+
     @Override
     @GetMapping(path = "/all")
     public List<ProductDto> readAll() {
