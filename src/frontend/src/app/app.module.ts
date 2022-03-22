@@ -5,13 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductService } from './product.service';
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule } from "@angular/router";
 import { LoginComponent } from './login/login.component';
-
-const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-];
-
 
 @NgModule({
   declarations: [
@@ -19,7 +14,7 @@ const routes: Routes = [
     LoginComponent,
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

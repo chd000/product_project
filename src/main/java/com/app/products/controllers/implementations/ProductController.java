@@ -21,7 +21,7 @@ public class ProductController implements ICrudController<ProductDto> {
         this.productService = productService;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/login")
     public String login(){
         return "authenticated successfully";
     }
